@@ -27,7 +27,7 @@
 
 <body id="page-top">
 <?php
-include ("updateProductoP.php");
+include ("updateClienteP.php");
 session_start();
 
 if (isset($_GET["e"])){
@@ -78,8 +78,7 @@ if (isset($_GET["e"])){
             </a>
             <div class="dropdown-menu" aria-labelledby="pagesDropdown">
             <a class="dropdown-item" href="../Productos/showProducto.php">Productos</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="../Ventas/showVentas.php">Ventas</a>
+       
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="../User/showUser.php">Usuarios</a>
             <div class="dropdown-divider"></div>
@@ -88,14 +87,12 @@ if (isset($_GET["e"])){
             <a class="dropdown-item" href="../Pedidos/showPedido.php">Pedidos</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="../Pagos/showPago.php">Pagos</a>
-            
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="../DetallePedido/showDetPedido.php">Detalle Pedido</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="../Clientes/showCliente.php">Clientes</a>
           </div>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="../Busqueda/search.php">
-                <i class="fas fa-fw fa-search"></i>
-                <span>Búsqueda</span></a>
-        </li>
+    
         <li class="nav-item">
             <a class="nav-link" href="../Reportes/generarReporte.php">
                 <i class="fas fa-fw fa-book"></i>
@@ -117,7 +114,7 @@ if (isset($_GET["e"])){
                     <a href="../index.php">Inicio</a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a href="showProducto.php">Productos</a>
+                    <a href="showCliente.php">Clientes</a>
                 </li>
                 <li class="breadcrumb-item active">Editar</li>
             </ol>
@@ -126,25 +123,25 @@ if (isset($_GET["e"])){
             <?php
             $conn = mysqli_connect("localhost", "root", "", "sicppi");
             $id = $_GET['id'];
-            $sql = mysqli_query($conn, "SELECT * FROM productos WHERE id_producto='$id'");
+            $sql = mysqli_query($conn, "SELECT * FROM clientes WHERE rfc='$id'");
             if(mysqli_num_rows($sql) == 0){
-                header("Location:showProducto.php");
+                header("Location:showCliente.php");
             }else{
                 $row = mysqli_fetch_assoc($sql);
             }
             ?>
             <div class="card card-register mx-auto">
-                <div class="card-header">Modificar nuevo producto</div>
+                <div class="card-header">Modificar cliente</div>
                 <div class="card-body">
-                    <form action="updateProducto.php" method="post" name="formProductos">
+                    <form action="updateCliente.php" method="post" name="formClientes">
                     
                         <div class="form-group">
                             <div class="form-row">
                                 <div class="col-md-12">
                                     <div class="form-label-group">
-                                        <input type="text" id="id" name="id" value="<?php echo $row['id_producto']; ?>" hidden="hidden">
-                                        <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Producto" required value="<?php echo $row['nombre']; ?>">
-                                        <label for="nombre">Nombre</label>
+                                        <input type="text" id="id" name="id" value="<?php echo $row['rfc']; ?>" hidden="hidden">
+                                        <input type="text" id="rfc" name="rfc" class="form-control" placeholder="RFC" required value="<?php echo $row['rfc']; ?>">
+                                        <label for="rfc">RFC</label>
                                         <div id="checkuser" class=""></div>
                                     </div>
                                 </div>
@@ -157,8 +154,8 @@ if (isset($_GET["e"])){
                                 <div class="col-md-12">
                                     <div class="form-label-group">
                                        
-                                        <input type="text" id="descripcion" name="descripcion" class="form-control" placeholder="Descripcion" required value="<?php echo $row['descripcion']; ?>">
-                                        <label for="descripcion">Descripcion</label>
+                                        <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre" required value="<?php echo $row['nombre']; ?>">
+                                        <label for="nombre">Nombre</label>
                                       
                                     </div>
                                 </div>
@@ -169,8 +166,8 @@ if (isset($_GET["e"])){
                             <div class="form-row">
                                 <div class="col-md-12">
                                     <div class="form-label-group">
-                                        <input type="number" step="0.01" id="precio" name="precio" class="form-control" placeholder="Precio" required value="<?php echo $row['precio']; ?>" >
-                                        <label for="precio">Precio</label>
+                                        <input type="number" step="0.000000001" id="latitud" name="latitud" class="form-control" placeholder="Latitud" required value="<?php echo $row['latitud']; ?>" >
+                                        <label for="latitud">Latitud</label>
                                     </div>
                                 </div>
                             </div>
@@ -179,52 +176,80 @@ if (isset($_GET["e"])){
                             <div class="form-row">
                                 <div class="col-md-12">
                                     <div class="form-label-group">
-                                        <input type="number" id="stock" name="stock" class="form-control" placeholder="Stock" required value="<?php echo $row['stock']; ?>" >
-                                        <label for="stock">Stock</label>
+                                        <input type="number" step="0.000000001" id="longitud" name="longitud" class="form-control" placeholder="Longitud" required value="<?php echo $row['longitud']; ?>" >
+                                        <label for="longitud">Longitud</label>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col-md-12">
+                                    <div class="form-label-group">
+                                        <input type="number"  step="0.01" id="deuda" name="deuda" class="form-control" placeholder="Deuda" required value="<?php echo $row['deuda']; ?>" >
+                                        <label for="deuda">Deuda</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col-md-12">
+                                    <div class="form-label-group">
+                                       
+                                        <input type="text" id="calle" name="calle" class="form-control" placeholder="Calle" required value="<?php echo $row['calle']; ?>">
+                                        <label for="calle">Calle</label>
+                                      
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col-md-12">
+                                    <div class="form-label-group">
+                                       
+                                        <input type="text" id="colonia" name="colonia" class="form-control" placeholder="Colonia" required value="<?php echo $row['colonia']; ?>">
+                                        <label for="colonia">Colonia</label>
+                                      
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col-md-12">
+                                    <div class="form-label-group">
+                                       
+                                        <input type="text" id="municipio" name="municipio" class="form-control" placeholder="Municipio" required value="<?php echo $row['municipio']; ?>">
+                                        <label for="municipio">Municipio</label>
+                                      
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col-md-12">
+                                    <div class="form-label-group">
+                                       
+                                        <input type="number" id="telefono" name="telefono" class="form-control" placeholder="Telefono" required value="<?php echo $row['telefono']; ?>">
+                                        <label for="telefono">Telefono</label>
+                                      
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
 
                            
-                        <div class="form-group">
-                            <div class="form-row">
-                                <div class="col-md-12">
-                                    <div class="form-label-group">
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                                <label class="input-group-text" for="id_departamento" >Departamento</label>
-                                            </div>
-
-                                            <?php
-                                            $sql = mysqli_query($conn, "SELECT id_departamento FROM departamentos");
-                                            $option = '';
-                                            if(mysqli_num_rows($sql) == 0){
-                                                header("Location: showProducto.php");
-                                            }else{
-                                                while($rows = mysqli_fetch_assoc($sql)){
-                                                    if($row['id_departamento']==$rows['id_departamento']){
-                                                        $option .= '<option value = "'.$rows['id_departamento'].'" selected="selected">'.$rows['id_departamento'].'</option>';
-                                                    }
-                                                    else{
-                                                        $option .= '<option value = "'.$rows['id_departamento'].'">'.$rows['id_departamento'].'</option>';
-                                                    }
-                                                }
-                                            }
-                                            ?>
-                                            <select class="custom-select" id="id_departamento" name="id_departamento" autofocus="autofocus" required>
-                                                <?php echo $option; ?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+              
 
                         <div class="control-group">
                             <div class="controls">
                                 <button type="submit" name="input" id="input" class="btn btn-sm btn-primary">Modificar</button>
-                                <a href="showProducto.php" class="btn btn-sm btn-danger">Cancelar</a>
+                                <a href="showCliente.php" class="btn btn-sm btn-danger">Cancelar</a>
                             </div>
                         </div>
 

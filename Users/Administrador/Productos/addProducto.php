@@ -65,14 +65,13 @@
     <!-- Sidebar -->
     <ul class="sidebar navbar-nav">
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-fw fa-folder"></i>
-            <span>Información</span>
-          </a>
-          <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-fw fa-folder"></i>
+                <span>Información</span>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="pagesDropdown">
             <a class="dropdown-item" href="../Productos/showProducto.php">Productos</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="../Ventas/showVentas.php">Ventas</a>
+            
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="../User/showUser.php">Usuarios</a>
             <div class="dropdown-divider"></div>
@@ -85,10 +84,20 @@
             <a class="dropdown-item" href="../DetallePedido/showDetPedido.php">Detalle Pedido</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="../Clientes/showCliente.php">Clientes</a>
-            
           </div>
+    
+        <li class="nav-item">
+            <a class="nav-link" href="../Reportes/generarReporte.php">
+                <i class="fas fa-fw fa-book"></i>
+                <span>Reportes</span></a>
         </li>
-      </ul>
+        <li class="nav-item">
+            <a class="nav-link" href="../Maps/Mapa.php">
+                <i class="fas fa-fw fa-map"></i>
+                <span>Mapas</span></a>
+        </li>
+    </ul>
+
 
     <div id="content-wrapper">
 
@@ -219,42 +228,6 @@ include("../include/logoutModal.php");
 include ("../include/scripts.php");
 ?>
 
-<script>
-    /*$(document).ready(function () {
-        $("#usuario").keyup(checarUser);
-    });
-
-    $(document).ready(function () {
-        $("#usuario").change(checarUser);
-    });
-
-    function checarUser() {
-        var usuario = document.getElementById('usuario').value;
-
-        if (usuario) {
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function () {
-                if (xhttp.readyState == 4 && xhttp.status == 200) {
-                    document.getElementById("checkuser").innerHTML = xhttp.responseText;
-                    nsresponsed = document.getElementById('userchecker').value;
-
-                    if (nsresponsed == "0") {
-                        document.getElementById("input").disabled = true;
-                    } else {
-                        document.getElementById("input").disabled = false;
-                    }
-                }
-            };
-            xhttp.open("POST", "checkUser.php", true);
-            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xhttp.send("user=" + usuario + "");
-        }
-        else{
-            document.getElementById("checkuser").innerHTML = "";
-            document.getElementById("input").disabled = false;
-        }
-    }*/
-</script>
 
 </body>
 

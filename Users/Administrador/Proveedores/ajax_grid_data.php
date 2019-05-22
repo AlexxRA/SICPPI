@@ -9,16 +9,13 @@ $requestData= $_REQUEST;
 
 $columns = array(
 // datatable column index  => database column name
-    0 => 'id_producto',
+    0 => 'id_departamento',
     1 => 'nombre',
-    2 => 'descripcion',
-    3 => 'precio',
-    4 => 'stock',
-    5 => 'id_departamento'
+    
 );
 
-$sql = "SELECT productos.id_producto, productos.nombre, productos.descripcion, productos.precio, productos.stock, productos.id_departamento, departamentos.id_departamento, departamentos.nombre AS nomdep";
-$sql.=" FROM departamentos INNER JOIN productos WHERE departamentos.id_departamento = productos.id_departamento";
+$sql = "SELECT *";
+$sql.="FROM departamentos";
 $query=mysqli_query($conn, $sql) or die("ajax_grid_data.php: get InventoryItems");
 $totalData = mysqli_num_rows($query);
 $totalFiltered = $totalData;  // when there is no search parameter then total number rows = total number filtered rows.
@@ -26,9 +23,10 @@ $totalFiltered = $totalData;  // when there is no search parameter then total nu
 if( !empty($requestData['search']['value']) ) {
     // if there is a search parameter
     $sql = "SELECT *";
-    $sql.=" FROM productos";
-    $sql.=" WHERE id_producto LIKE '%".$requestData['search']['value']."%' ";    // $requestData['search']['value'] contains search parameter
+    $sql.="FROM departamentos";
+    $sql.=" WHERE id_departamento LIKE '%".$requestData['search']['value']."%' ";    // $requestData['search']['value'] contains search parameter
     $sql.=" OR nombre LIKE '%".$requestData['search']['value']."%' ";
+  
     $query=mysqli_query($conn, $sql) or die("ajax_grid_data.php: get PO");
     $totalFiltered = mysqli_num_rows($query); // when there is a search parameter then we have to modify total number filtered rows as per search result without limit in the query
 
@@ -36,8 +34,8 @@ if( !empty($requestData['search']['value']) ) {
     $query=mysqli_query($conn, $sql) or die("ajax_grid_data.php: get PO"); // again run query with limit
 
 } else {
-    $sql = "SELECT productos.id_producto, productos.nombre, productos.descripcion, productos.precio, productos.stock, productos.id_departamento, departamentos.id_departamento, departamentos.nombre AS nomdep";
-    $sql.=" FROM departamentos INNER JOIN productos WHERE departamentos.id_departamento = productos.id_departamento";
+    $sql = "SELECT *";
+    $sql.="FROM departamentos";
     $sql.=" ORDER BY ". $columns[$requestData['order'][0]['column']]."   ".$requestData['order'][0]['dir']."   LIMIT ".$requestData['start']." ,".$requestData['length']."   ";
     $query=mysqli_query($conn, $sql) or die("ajax_grid_data.php: get PO");
 
@@ -47,20 +45,17 @@ $data = array();
 while( $row=mysqli_fetch_array($query) ) {  // preparing an array
     $nestedData=array();
 
-    $nestedData[] = $row["id_producto"];//0
+    $nestedData[] = $row["id_departamento"];//0
     $nestedData[] = $row["nombre"];//1
-    $nestedData[] = $row["descripcion"];//2
-    $nestedData[] = $row["precio"];//3
-    $nestedData[] = $row["stock"];//4
-    $nestedData[] = $row["nomdep"];//5
+    
     $nestedData[] = '<td><center>
-                     <a href="updateProducto.php?id='.$row['id_producto'].'"  data-toggle="tooltip" title="Editar datos" class="btn btn-sm btn-info"> <i class="fa fa-fw fa-pencil-alt"></i> </a>
-                     <a href="showProducto.php?action=delete&id='.$row['id_producto'].'"  data-toggle="tooltip" title="Eliminar" class="btn btn-sm btn-danger" onclick="return confirm(\'Estas seguro de elimar este producto?\');"> <i class="fa fa-fw fa-trash"></i> </a>
-				     </center></td>';//6
+                     <a href="updateDepartamento.php?id='.$row['id_departamento'].'"  data-toggle="tooltip" title="Editar datos" class="btn btn-sm btn-info"> <i class="fa fa-fw fa-pencil-alt"></i> </a>
+                     <a href="showDepartamento.php?action=delete&id='.$row['id_departamento'].'"  data-toggle="tooltip" title="Eliminar" class="btn btn-sm btn-danger" onclick="return confirm(\'Estas seguro de elimar el departamento?\');"> <i class="fa fa-fw fa-trash"></i> </a>
+				     </center></td>';//2
 
     $data[] = $nestedData;
-}
 
+}
 
 $json_data = array(
     "draw"            => intval( $requestData['draw'] ),   // for every request/draw by clientside , they send a number as a parameter, when they recieve a response/data they first check the draw number, so we are sending same number in draw.

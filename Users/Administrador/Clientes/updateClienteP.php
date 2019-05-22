@@ -7,24 +7,27 @@ if(isset($_POST['input'])) {
 
         
   
-    $id = mysqli_real_escape_string($conn, $_POST["id"]);
+    $id = mysqli_real_escape_string($conn, $_POST["rfc"]);
     $nombre = mysqli_real_escape_string($conn, $_POST["nombre"]);
-    $descripcion = mysqli_real_escape_string($conn, $_POST["descripcion"]);
-    $precio = mysqli_real_escape_string($conn, $_POST["precio"]);
-    $stock = mysqli_real_escape_string($conn, $_POST["stock"]);
-    $departamento = mysqli_real_escape_string($conn, $_POST["id_departamento"]);
+    $latitud = mysqli_real_escape_string($conn, $_POST["latitud"]);
+    $longitud = mysqli_real_escape_string($conn, $_POST["longitud"]);
+    $deuda = mysqli_real_escape_string($conn, $_POST["deuda"]);
+    $calle = mysqli_real_escape_string($conn, $_POST["calle"]);
+    $colonia = mysqli_real_escape_string($conn, $_POST["colonia"]);
+    $municipio = mysqli_real_escape_string($conn, $_POST["municipio"]);
+    $telefono = mysqli_real_escape_string($conn, $_POST["telefono"]);
 
 
-    $sql="UPDATE productos SET nombre='$nombre', descripcion='$descripcion', precio='$precio', stock='$stock', id_departamento='$departamento' WHERE id_producto = '$id' ;";
+    $sql="UPDATE clientes SET rfc='$id', nombre='$nombre', latitud='$latitud', longitud='$longitud', deuda='$deuda', calle='$calle', colonia='$colonia', municipio='$municipio', telefono='$telefono' WHERE rfc = '$id' ;";
         
 
 
     $query = mysqli_query($conn,$sql);
     if ($query) {
-        header("Location: showProducto.php?e=3");
+        header("Location: showCliente.php?e=3");
     }
     else {
-        header("Location:updateProducto.php?id=".$id."&e=1");
+        header("Location:updateCliente.php?id=".$id."&e=1");
     }
 }
 ?>

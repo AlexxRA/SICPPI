@@ -183,11 +183,9 @@
                                     <th>ID</th>
                                     <th>Nombre</th>
                                     <th>Descripción</th>
-                                    <th>Stock</th>
                                     <th>Cantidad</th>
                                     <th>Precio unitario</th>
                                     <th>Subtotal</th>
-                                    <th>Acción</th>
                                 </tr>
 
                                 </thead>

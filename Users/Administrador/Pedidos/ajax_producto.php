@@ -49,14 +49,12 @@
                             <td>'.$data['id_producto'].'</td>
                             <td id="nombre">'.$data['nombre'].'</td>
                             <td id="descripcion">'.$data['descripcion'].'</td>
-                            <td id="stock"></td>
                             <td>'.$data['cantprod'].'</td>
                             <td id="precioUnitario">'.$data['precio'].'</td>
                             <td id="subTotal">'.$precio.'</td>
-                            <td><a href="#"  style="display: none;"><i class="fa fa-fw fa-plus"></i></a></td>
                         </tr>';
 
-                    $detalleTotales='<tr>
+                    $detalleTotales='<tr  class="float-right">
                             <td>TOTAL</td>
                             <td>'.$total.'</td>
                         </tr>';
@@ -121,14 +119,12 @@
                             <td>'.$data['id_producto'].'</td>
                             <td id="nombre">'.$data['nombre'].'</td>
                             <td id="descripcion">'.$data['descripcion'].'</td>
-                            <td id="stock"></td>
                             <td>'.$data['cantprod'].'</td>
                             <td id="precioUnitario">'.$data['precio'].'</td>
                             <td id="subTotal">'.$precio.'</td>
-                            <td><a href="#"  style="display: none;"><i class="fa fa-fw fa-plus"></i></a></td>
                         </tr>';
 
-                $detalleTotales='<tr>
+                $detalleTotales='<tr  class="float-right">
                             <td>TOTAL</td>
                             <td>'.$total.'</td>
                         </tr>';

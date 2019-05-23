@@ -1,8 +1,7 @@
 <?php
 if(isset($_POST['input'])) {
-    include("../../../class/User.php");
 
-    $conn = mysqli_connect("localhost", "root", "", "sicppi");
+    include("../include/conexion.php");
 
         
     $id = mysqli_real_escape_string($conn, $_POST["id"]);    

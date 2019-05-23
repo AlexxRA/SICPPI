@@ -1,7 +1,7 @@
 <?php
     session_start();
 
-$conn = mysqli_connect("localhost", "root", "", "sicppi");
+include("Users/Administrador/include/conexion.php");
 
     $user = mysqli_real_escape_string($conn, $_POST["inputUser"]);
     $pass = mysqli_real_escape_string($conn, $_POST["inputPassword"]);

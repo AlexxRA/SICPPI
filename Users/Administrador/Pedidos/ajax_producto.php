@@ -1,7 +1,5 @@
 <?php
-    $conn = mysqli_connect("localhost", "root", "", "sicppi");
-    $conn->set_charset("utf8");
-
+    include("../include/conexion.php");
 
     if ($_POST['action']=='buscarProducto') {
         $id_producto = $_POST["p"];

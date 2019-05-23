@@ -121,7 +121,7 @@ if (isset($_GET["e"])){
 
             <!-- Registrar nuevo Producto-->
             <?php
-            $conn = mysqli_connect("localhost", "root", "", "sicppi");
+            include("../include/conexion.php");
             $id = $_GET['id'];
             $sql = mysqli_query($conn, "SELECT * FROM clientes WHERE rfc='$id'");
             if(mysqli_num_rows($sql) == 0){

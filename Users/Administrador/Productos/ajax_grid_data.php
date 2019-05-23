@@ -1,8 +1,7 @@
 <?php
 
 //$Connector = new Connector();
-$conn = mysqli_connect("localhost", "root", "", "sicppi");
-$conn->set_charset("utf8");
+include("../include/conexion.php");
 
 // storing  request (ie, get/post) global array to a variable
 $requestData= $_REQUEST;

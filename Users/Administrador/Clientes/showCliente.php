@@ -36,7 +36,7 @@
     //include("../../../caducarSesion.php");
     session_start();
     //include("../../../SGBD/Connector.php");
-    $conn = mysqli_connect("localhost", "root", "", "sicppi");
+        include("../include/conexion.php");
 
     if(isset($_GET['action']) == 'delete'){
         $id_delete = intval($_GET['id']);

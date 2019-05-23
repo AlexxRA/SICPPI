@@ -1,6 +1,6 @@
 <?php
     if(isset($_POST['enviar'])) {
-        $conn = mysqli_connect("localhost", "root", "", "sicppi");
+        include("../include/conexion.php");
 
    
         $rfc = mysqli_real_escape_string($conn, $_POST["rfc"]);

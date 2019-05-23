@@ -1,9 +1,8 @@
 <?php
 if(isset($_POST['input'])) {
-   
 
-    $conn = mysqli_connect("localhost", "root", "", "sicppi");
-    $conn->set_charset("utf8");
+
+    include("../include/conexion.php");
 
         
   

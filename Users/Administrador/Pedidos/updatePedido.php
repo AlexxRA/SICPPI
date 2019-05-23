@@ -124,7 +124,7 @@ if (isset($_GET["e"])){
 
             <!-- Registrar nuevo Pedido-->
             <?php
-            $conn = mysqli_connect("localhost", "root", "", "sicppi");
+            include("../include/conexion.php");
             $id = $_GET['id'];
             $sql = mysqli_query($conn, "SELECT * FROM pedidos WHERE id_pedido='$id'");
             if(mysqli_num_rows($sql) == 0){

@@ -164,16 +164,7 @@
                         </div>
 
 
-                        <label for="latitude">
-                            Latitud:
-                        </label>
-                        <input id="txtLat" type="text"  value="0">
-                        <label for="longitude">
-                            Longitud:
-                        </label>
-                        <input id="txtLng" type="text" value="0"><br />
-                        <br />
-                        <br />
+
                         <div id="map_canvas" style="width: auto; height: 500px;">
                         </div>
 
@@ -295,8 +286,8 @@ include ("../include/scripts.php");
         // gets the coords when drag event ends
         // then updates the input with the new coords
         google.maps.event.addListener(vMarker, 'dragend', function (evt) {
-            $("#txtLat").val(evt.latLng.lat().toFixed(6));
-            $("#txtLng").val(evt.latLng.lng().toFixed(6));
+            $("#latitud").val(evt.latLng.lat().toFixed(6));
+            $("#longitud").val(evt.latLng.lng().toFixed(6));
 
             map.panTo(evt.latLng);
         });

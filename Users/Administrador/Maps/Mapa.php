@@ -5,7 +5,7 @@
     <?php
     include("../include/head.php")
     ?>
-    <title>DB Admin - PMI</title>
+    <title>Abarrotes RAGA</title>
 </head>
 
 <body id="page-top">

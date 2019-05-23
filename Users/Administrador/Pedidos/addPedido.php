@@ -145,7 +145,7 @@
                             <table class="table table-bordered" id="lookup" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
+                                        <th>ID (Código de barras)</th>
                                         <th>Nombre</th>
                                         <th>Descripción</th>
                                         <th>Stock</th>
@@ -180,7 +180,7 @@
                             <table class="table table-bordered" id="tablaDetalle" width="100%" cellspacing="0">
                                 <thead>
                                 <tr>
-                                    <th>ID</th>
+                                    <th>ID (Código de barras)</th>
                                     <th>Nombre</th>
                                     <th>Descripción</th>
                                     <th>Cantidad</th>
@@ -202,7 +202,7 @@
                        
                         <div class="control-group">
                             <div class="controls">
-                                <button type="submit" name="enviar" id="enviar" class="btn btn-sm btn-primary">Procesar pedido</button>
+                                <button name="procesarPedido" id="procesarPedido" class="btn btn-sm btn-primary">Procesar pedido</button>
                                 <a href="showPedido.php" class="btn btn-sm btn-danger">Cancelar pedido</a>
                             </div>
                         </div>
@@ -271,6 +271,7 @@ include ("../include/scripts.php");
                             $("#cantidad").val('0');
                             $("#cantidad").attr('disabled','disabled');
                             $("#agregarProductoDetalle").slideUp();
+                            $("#id_producto").val("");
                         }
                     },
 
@@ -349,8 +350,41 @@ include ("../include/scripts.php");
 
         });
 
+        //Generar pedido
+        $("#procesarPedido").click(function (e) {
+            e.preventDefault();
+            var rows = $("#detalleVenta >tr").length;
 
-        $("#cliente").change(function (e) {
+            if(rows > 0){
+                var action = 'procesarPedido';
+                var rfc = $('#cliente').val();
+                $.ajax({
+                    url: 'ajax_producto.php',
+                    type: "POST",
+                    async: true,
+                    data: ("action=" + action+"&rfc="+rfc),
+                    success: function (response) {
+                        if(response != 'error'){
+                            window.location.href = 'showPedido.php?e=2';
+                        }
+                    },
+
+                    error: function (error) {
+
+                    }
+                });
+            }
+            else{
+                alert("No se han seleccionado productos");
+            }
+
+
+
+
+        });
+
+
+        /*$("#cliente").change(function (e) {
             e.preventDefault();
             var rfc = $(this).val();
             var action = 'getCliente';
@@ -373,9 +407,7 @@ include ("../include/scripts.php");
 
                 }
             });
-
-
-        });
+        });*/
 
 
 

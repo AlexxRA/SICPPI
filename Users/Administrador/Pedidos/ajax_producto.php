@@ -142,5 +142,19 @@
         exit;
     }
 
+    if ($_POST['action']=='procesarPedido') {
+        $rfc = $_POST["rfc"];
+
+        $sql = mysqli_query($conn,"CALL procesar_pedido($rfc)");
+        $numRows = mysqli_num_rows($sql);
+        if($numRows>0){
+            $data = mysqli_fetch_assoc($sql);
+            echo json_encode($data,JSON_UNESCAPED_UNICODE);
+            exit;
+        }
+        echo 'error';
+        exit;
+    }
+
 
 ?>
